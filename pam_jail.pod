@@ -1,0 +1,73 @@
+=pod
+
+=head1 NAME
+
+B<pam_jail> - authentication, account and session management PAM jailing module. 
+
+=head1 DESCRIPTION
+
+B<pam_jail> is a PAM module that allows jailing users in vserver contexts. A
+configuration file defines xid's associated with specific group names. When 
+a user belonging to such a group logs in through pam_jail, the process performing 
+the login will be jailed in the vserver contexts (security context + network context
+and corresponding namespaces) matching the associated xid. This jailing functionality
+is provided for three PAM management groups: authentication, account management, 
+and session management.
+
+Note that B<pam_jail> does not create those vserver contexts, they must be already 
+running, and typically kept alive by a daemon or through the use of L<vsctl(8)|vsctl>'s
+B<setup> functionality.
+
+=head1 OPTIONS
+
+B<pam_jail> supports the following options:
+
+=over 12
+
+=item B<debug> 
+
+Log debugging information via L<syslog(3)|syslog>.
+
+=item B<no_jail>	
+
+Perform the usual group/xid lookup, but do not actually enter the jail if found.
+Useful for debugging.
+
+=item B<not_found_fails>
+
+Return an error when a user doesn't belong to any group associated with an xid. Wether
+or not this actually prevents this user from e.g. logging in depends on the specific 
+pam stack involved.
+
+=item B<proxy>
+
+Set up a terminal proxy before entering the jail. This opens a Unix98 pseudo-terminal, 
+and then forks the current process. The child then sets up the slave side of this pty
+as its controlling terminal before entering the jail, while the father stays outside 
+the jail and relays writes and reads from the master side of the pty to and from its
+own controlling terminal, thus acting as a proxy for the jailed process. This is 
+especially useful when logging in from a console, to avoid entering the jail with an
+open file descriptor on e.g. /dev/tty1.
+
+=back
+
+=head1 FILES
+
+B<pam_jail> uses F</etc/security/jail.conf> as its configuration file. This file contains
+associations in the form: B<groupname> [spaces,tabs] B<xid>, one per line. Comments can
+be written after a '#' character.
+
+=head1 AUTHOR 
+
+Vincent Strubel <L<clipos@ssi.gouv.fr>>
+
+=head1 CREDITS
+
+B<pam_jail> is largely based on B<pam_chroot> code, by Matthew Kirkwood, Ed
+Schmollinger, Heiko Hund and John Newbigin.
+
+=head1 SEE ALSO
+
+L<vsctl(8)|vsctl>, L<pam(8)|pam>, L<vserver(8)|vserver>
+ 
+=cut

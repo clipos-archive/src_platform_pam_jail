@@ -1,0 +1,8 @@
+debug - Output lots of extra debugging info via syslog
+
+proxy - Set up a terminal proxy
+
+use_first_pass, try_first_pass, use_mapped_pass - Nothing.
+
+no_jail - Don't really jail, but do everything else normally.
+

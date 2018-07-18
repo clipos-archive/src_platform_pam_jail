@@ -1,0 +1,31 @@
+# ChangeLog for sys-auth/pam_jail
+
+*pam_jail-1.1.0 (20 Mar 2014)
+
+  20 Aug 2014; ANSSI <clipos@ssi.gouv.fr>
+  pam_jail-1.1.0.ebuild:
+  Fixed build warning.
+  Update + rename configuration file.
+
+  07 Nov 2007; Vincent Strubel <clipos@ssi.gouv.fr>
+  Remove stale ebuilds before 1.0.1.
+
+*pam_jail-1.0.1 (20 Aug 2007)
+
+  20 Aug 2007; Vincent Strubel <clipos@ssi.gouv.fr>
+  pam_jail-1.0.1.ebuild:
+  Smallish fix for multiple separators in conf file.
+
+*pam_jail-1.0-r1 (08 Aug 2007)
+
+  08 Aug 2007; EADS D&S <clipos@ssi.gouv.fr>
+  +pam_jail-1.O-r1.ebuild, +files/jail.conf:
+  Add jail.conf.
+  Add verictl entry.
+
+*pam_jail-1.0 (12 Jul 2007)
+
+  12 Jul 2007; Vincent Strubel <clipos@ssi.gouv.fr>
+  pam_jail-1.0.ebuild:
+  Initial import. Mostly tested, for a change, but expect some 
+  rough edges still :)
